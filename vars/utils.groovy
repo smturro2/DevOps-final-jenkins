@@ -20,7 +20,7 @@ def buildDB() {
     // todo
 }
 
-def testWebApp() {
+def testJavascript() {
     echo 'Testing web application'
     sh 'npm test'
 }
