@@ -46,13 +46,13 @@ def pushDocker(String registry, String repo, String tag, String username, String
 
 def conditionalDeployment(String branchName) {
     if (branchName == 'main') {
-        // todo
+        echo "todo main"
         return
     } else if (branchName.startsWith('release/')) {
-        // todo
+        echo "todo release"
         return
     } else if (branchName == 'develop') {
-        // todo
+        echo "todo develop"
         return
     }
     echo "Deployment skipped"
