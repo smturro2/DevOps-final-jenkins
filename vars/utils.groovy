@@ -32,11 +32,16 @@ def runStaticScan() {
 def buildDocker(String registry, String repo, String tag) {
     echo 'Building Docker image'
     sh "docker build -t ${registry}/${repo}:${tag} ."
+    sh "docker build -t ${registry}/${repo}:latest ."
 }
 
-def pushDocker(String registry, String repo, String tag) {
+def pushDocker(String registry, String repo, String tag, String username, Sting password) {
+    echo 'Logging into docker hub'
+    sh "echo ${password} | docker login -u ${username} --password-stdin"
+
     echo 'Pushing Docker image'
     sh "docker push ${registry}/${repo}:${tag}"
+    sh "docker push ${registry}/${repo}:latest"
 }
 
 def conditionalDeployment(String branchName) {
