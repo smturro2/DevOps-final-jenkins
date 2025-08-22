@@ -35,7 +35,7 @@ def buildDocker(String registry, String repo, String tag) {
     sh "docker build -t ${registry}/${repo}:latest ."
 }
 
-def pushDocker(String registry, String repo, String tag, String username, Sting password) {
+def pushDocker(String registry, String repo, String tag, String username, String password) {
     echo 'Logging into docker hub'
     sh "echo ${password} | docker login -u ${username} --password-stdin"
 
