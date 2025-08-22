@@ -10,7 +10,6 @@ def buildWebApp() {
 def buildAPI() {
     echo 'Building API application'
     sh 'npm install'
-    sh 'npm run build'
 
     echo 'Running linters'
     sh 'npm run lint'
