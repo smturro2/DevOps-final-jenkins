@@ -52,6 +52,6 @@ def conditionalDeployment(String branchName) {
     } else if (branchName == 'develop') {
         echo "todo develop"
     } else {
-        echo "Deployment skipped"
+        echo "Deployment skipped for branch: ${branchName}"
     }
 }
