@@ -35,22 +35,22 @@ def buildDocker(String registry, String repo, String tag) {
     sh "docker build -t ${registry}/${repo}:latest ."
 }
 
-def pushDocker(String registry, String repo, String tag, String username, String password) {
-    echo 'Logging into docker hub'
-    sh "echo ${password} | docker login -u ${username} --password-stdin"
-
-    echo 'Pushing Docker image'
-    sh "docker push ${registry}/${repo}:${tag}"
-    sh "docker push ${registry}/${repo}:latest"
-}
-
-def conditionalDeployment(String branchName) {
+def conditionalDeployment(String branchName, String registry, String repo, String tag, String username, String password) {
     if (branchName == 'main') {
-        echo "todo main"
+        // Push version tag and latest
+        echo 'Logging into docker hub'
+        sh "echo ${password} | docker login -u ${username} --password-stdin"
+
+        echo 'Pushing Docker image'
+        sh "docker push ${registry}/${repo}:${tag}"
+        sh "docker push ${registry}/${repo}:latest"
     } else if (branchName.startsWith('release/')) {
-        echo "todo release"
-    } else if (branchName == 'develop') {
-        echo "todo develop"
+        // Push beta tag
+        echo 'Logging into docker hub'
+        sh "echo ${password} | docker login -u ${username} --password-stdin"
+
+        echo 'Pushing Docker image'
+        sh "docker push ${registry}/${repo}:beta"
     } else {
         echo "Deployment skipped for branch: ${branchName}"
     }
