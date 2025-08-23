@@ -32,7 +32,7 @@ def buildDocker(String registry, String repo, String tag) {
     sh "docker build -t ${registry}/${repo}:latest ."
 }
 
-def runSecurityScan() {
+def runSecurityScan(String registry, String repo, String tag) {
     sh "trivy image ${registry}/${repo}:${tag}"
 }
 
