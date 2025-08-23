@@ -24,10 +24,6 @@ def testJavascript() {
     sh 'npm test'
 }
 
-def runStaticScan() {
-    // todo
-}
-
 def buildDocker(String registry, String repo, String tag) {
     echo 'Building Docker image'
     sh "docker build -t ${registry}/${repo}:beta ."
