@@ -33,6 +33,8 @@ def buildDocker(String registry, String repo, String tag) {
 
 def conditionalDeployment(String branchName, String registry, String repo, String tag, String username, String password) {
     if (branchName == 'main') {
+        input message: "Approve deployment to 'latest'?", ok: "Deploy"
+        
         // Push version tag and latest
         echo 'Logging into docker hub'
         sh "echo ${password} | docker login -u ${username} --password-stdin"
