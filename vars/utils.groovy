@@ -19,6 +19,7 @@ def buildDB() {
     echo 'Build skipped for database'
 }
 
+
 def testJavascript() {
     echo 'Testing web application'
     sh 'npm test'
@@ -26,15 +27,19 @@ def testJavascript() {
 
 def buildDocker(String registry, String repo, String tag) {
     echo 'Building Docker image'
-    sh "docker build -t ${registry}/${repo}:beta ."
     sh "docker build -t ${registry}/${repo}:${tag} ."
+    sh "docker build -t ${registry}/${repo}:beta ."
     sh "docker build -t ${registry}/${repo}:latest ."
+}
+
+def runSecurityScan() {
+    sh "trivy image ${registry}/${repo}:${tag}"
 }
 
 def conditionalDeployment(String branchName, String registry, String repo, String tag, String username, String password) {
     if (branchName == 'main') {
         input message: "Approve deployment to 'latest'?", ok: "Deploy"
-        
+
         // Push version tag and latest
         echo 'Logging into docker hub'
         sh "echo ${password} | docker login -u ${username} --password-stdin"
