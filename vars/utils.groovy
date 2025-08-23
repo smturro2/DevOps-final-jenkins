@@ -16,8 +16,7 @@ def buildAPI() {
 }
 
 def buildDB() {
-    echo 'Building database application'
-    // todo
+    echo 'Build skipped for database'
 }
 
 def testJavascript() {
@@ -31,6 +30,7 @@ def runStaticScan() {
 
 def buildDocker(String registry, String repo, String tag) {
     echo 'Building Docker image'
+    sh "docker build -t ${registry}/${repo}:beta ."
     sh "docker build -t ${registry}/${repo}:${tag} ."
     sh "docker build -t ${registry}/${repo}:latest ."
 }
