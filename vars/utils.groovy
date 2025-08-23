@@ -33,7 +33,7 @@ def buildDocker(String registry, String repo, String tag) {
 }
 
 def runSecurityScan(String registry, String repo, String tag) {
-    sh "trivy image ${registry}/${repo}:${tag}"
+    sh "trivy image ${registry}/${repo}:${tag} --scanners vuln"
 }
 
 def conditionalDeployment(String branchName, String registry, String repo, String tag, String username, String password) {
